@@ -1,0 +1,42 @@
+//вариант №20
+#include <stdio.h>
+#include <stdlib.h>
+
+const int i0=-25;
+const int j0=-9;
+const int l0=-8;
+
+int min(int x,int y){
+  int min=x<y ?  x : y;
+  return min;
+}
+
+int max(int x,int y){
+  int max=x<y ?  y : x;
+  return max;
+}
+
+int sign(int x)
+{
+    int sign=(x<0 ?-1 :1);
+    return sign;
+}
+
+int main()
+{
+  int i = i0, j = j0, l = l0, ilast = i, jlast = j, llast = l;
+  for (int k=0;k<=50;++k)
+  {
+    ilast=i;
+    jlast=j;
+    llast=l;
+    i=(abs(ilast-jlast)*llast-abs(jlast-llast)*ilast+abs(ilast-llast)*jlast)%20-k;
+    j=(min(ilast,jlast)*max(jlast,llast)*min(ilast,llast))%25+5*(sign(ilast))+k;
+    l=abs(llast)*sign(ilast-jlast)-abs(ilast)*sign(jlast-llast)+abs(jlast)*sign(ilast-llast);
+    if (i+j>=-20 && i+j <=-10){
+          printf("попал k=%d i=%d j=%d l=%d",k,i,j,l);
+          return 0;
+        }
+  }
+  printf("не попал i=%d j=%d l=%d",i,j,l);
+}
